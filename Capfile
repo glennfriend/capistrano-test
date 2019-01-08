@@ -2,19 +2,16 @@
 set :deploy_config_path, 'tools/capistrano/deploy.rb'
 set :stage_config_path, 'tools/capistrano/stages'
 
+require 'capistrano/setup'      # Load DSL and set up stages
+require 'capistrano/deploy'     # Include default deployment tasks
 require 'capistrano/env-config'
-
-# Load DSL and set up stages
-require 'capistrano/setup'
-
-# Include default deployment tasks
-require 'capistrano/deploy'
 require 'capistrano/composer'
 require 'capistrano/laravel'
 require 'capistrano/nvm'
 require 'capistrano/yarn'
 require 'capistrano/locally'    # deploy to localhost
-require 'whenever/capistrano'   # sync crontab content
+
+# require 'whenever/capistrano  # sync crontab content
 
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
