@@ -93,3 +93,7 @@ namespace :deploy do
     end
   end
 end
+
+
+
+# see https://github.com/SimplyBridal/kid-guard-backend/blob/master/config/deploy.rb

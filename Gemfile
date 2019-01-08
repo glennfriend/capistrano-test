@@ -7,3 +7,5 @@ gem 'capistrano-laravel'
 gem 'capistrano-yarn'
 gem 'capistrano-nvm'
 gem 'capistrano-locally'
+
+gem 'whenever', require: false
