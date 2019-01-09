@@ -2,9 +2,9 @@
 set :application, ENV['APPLICATION']
 set :repo_url, ENV['REPO']
 set :deploy_to, ENV['DEPLOY_TO']
-set :php_bin_path, "$HOME/.phpbrew/php/php-7.1.14/bin"
-set :exec_phpbrew, "source ~/.phpbrew/bashrc && phpbrew use 7.1.14"
-set :exec_nvm,     "source ~/.nvm/nvm.sh && nvm use 8.9.1"
+set :php_bin_path, "$HOME/.phpbrew/php/php-7.1.23/bin"
+set :exec_phpbrew, "source $HOME/.phpbrew/bashrc && phpbrew use 7.1.23"
+set :exec_nvm,     "source $HOME/.nvm/nvm.sh && nvm use 10.8.0"
 
 
 # Default branch is :master
