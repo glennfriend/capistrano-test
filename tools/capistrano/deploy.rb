@@ -21,18 +21,18 @@ set :exec_nvm,      "source $HOME/.nvm/nvm.sh     && nvm use 10.8.0"
 # set :log_level, :debug
 
 # Default value for :pty is false
-set :pty, true
+# set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{.env}
+# set :linked_files, %w{.env}
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for default_env is {}
-set :default_env, {
-  path: "#{fetch(:php_bin_path)}:/opt/ruby/bin:$PATH"
-}
+# set :default_env, {
+#   path: "#{fetch(:php_bin_path)}:/opt/ruby/bin:$PATH"
+# }
 
 set :linked_dirs, %w{vendor storage node_modules}
 
