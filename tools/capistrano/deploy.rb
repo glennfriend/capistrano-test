@@ -81,7 +81,8 @@ namespace :deploy do
       execute "cd '#{fetch(:deploy_to)}/current' && pwd > /tmp/screenshot && ls -lhA --time-style=long-iso >> /tmp/screenshot && cat /tmp/screenshot"
       execute "whereis source"
       execute "where source"
-      execute "cd '#{fetch(:deploy_to)}/current' && source. $HOME/.phpbrew/bashrc && phpbrew use 7.1.23"
+      execute "cd '#{fetch(:deploy_to)}/current' && source ~/.phpbrew/bashrc && phpbrew use 7.1.23"
+      execute "cd '#{fetch(:deploy_to)}/current' && source $HOME/.phpbrew/bashrc && phpbrew use 7.1.23"
       execute "cd '#{fetch(:deploy_to)}/current' && php --version && php autorun.php"
       execute "cd '#{fetch(:deploy_to)}/current' && php autorun.php"
 
