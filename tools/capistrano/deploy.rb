@@ -1,6 +1,6 @@
 # config valid only for current version of Capistrano
 
-# set :application,   ENV['APPLICATION']  # my-app
+set :application,   ENV['APPLICATION']    # my-app
 set :repo_url,      ENV['REPO']           # git@github.com:your_github_account/project-name.git
 set :deploy_to,     ENV['DEPLOY_TO']      # /var/www/my-app
 
@@ -21,33 +21,35 @@ set :exec_nvm,      "source $HOME/.nvm/nvm.sh && nvm use 10.8.0"
 # set :log_level, :debug
 
 # Default value for :pty is false
-# set :pty, true
+set :pty, true
 
 # Default value for :linked_files is []
-# set :linked_files, %w{.env}
+set :linked_files, %w{.env}
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for default_env is {}
-# set :default_env, {
-#   path: "#{fetch(:php_bin_path)}:/opt/ruby/bin:$PATH"
-# }
+set :default_env, {
+  path: "#{fetch(:php_bin_path)}:/opt/ruby/bin:$PATH"
+}
 
 set :linked_dirs, %w{vendor storage node_modules}
 
-set :composer_working_dir, -> { "#{fetch(:release_path)}" }
-set :composer_install_flags, ''
+###
+#set :composer_working_dir, -> { "#{fetch(:release_path)}" }
+#set :composer_install_flags, ''
 
+
+###
 set :laravel_working_dir, "./"
 set :laravel_dotenv_file, ".env"  # do not copy local .env to the server
 set :laravel_version, 5.5
-
 set :laravel_artisan_flags, "--env=production"
-
 set :laravel_set_linked_dirs, false
 set :laravel_set_acl_paths, true
 set :laravel_server_user, "www-data"
+
 
 # nvm settings
 set :nvm_type, :user # or :system, depends on your nvm setup
