@@ -10,7 +10,8 @@ require 'capistrano/laravel'
 require 'capistrano/nvm'
 require 'capistrano/yarn'
 require 'capistrano/locally'    # deploy to localhost
-require 'whenever/capistrano'   # sync crontab content
+
+# require 'whenever/capistrano  # sync crontab content
 
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined

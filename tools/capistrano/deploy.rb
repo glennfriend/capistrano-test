@@ -43,7 +43,7 @@ set :composer_install_flags, ''
 ###
 set :laravel_working_dir, "./"
 set :laravel_dotenv_file, ".env"  # do not copy local .env to the server
-set :laravel_version, 5.5
+set :laravel_version, 5.6
 set :laravel_artisan_flags, "--env=production"
 set :laravel_set_linked_dirs, false
 set :laravel_set_acl_paths, true
@@ -75,9 +75,8 @@ namespace :deploy do
   after 'deploy:symlink:release', :update_php_fpm do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
 
-      execute "cd '#{fetch(:deploy_to)}/current' && ls -lhA --time-style=long-iso"
-      execute "abc"
-      execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_phpbrew)} && php autorun.php"
+      execute "cd '#{fetch(:deploy_to)}/current' && ls -lhA --time-style=long-iso > /tmp/screenshot && cat /tmp/screenshot"
+      execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_phpbrew)} && php --version && php autorun.php"
       execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_nvm)}     && yarn"
       execute "sudo supervisorctl reread && sudo supervisorctl update && sudo service supervisor reload"
       execute :phpbrew, :fpm, :start

@@ -9,7 +9,7 @@ gem 'capistrano-nvm'
 gem 'capistrano-locally'
 
 
-gem 'whenever', require: false
+# gem 'whenever', require: false    # sync crontab content
 
 
 # dotenv-safe to check .env & .env.example
