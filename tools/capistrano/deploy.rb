@@ -78,11 +78,8 @@ namespace :deploy do
   after 'deploy:symlink:release', :update_php_fpm do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
 
-      execute "cd '#{fetch(:deploy_to)}/current' && ls -lhA --time-style=long-iso > /tmp/screenshot && pwd && cat /tmp/screenshot"
-      execute "ls -lhA --time-style=long-iso > /tmp/screenshot && pwd && cat /tmp/screenshot"
-      execute "echo $HOME"
-      execute "cd '#{fetch(:deploy_to)}/current' && source $HOME/.phpbrew/bashrc "
-      execute "cd '#{fetch(:deploy_to)}/current' && phpbrew use 7.1.23"
+      execute "cd '#{fetch(:deploy_to)}/current' && pwd > /tmp/screenshot && ls -lhA --time-style=long-iso >> /tmp/screenshot && cat /tmp/screenshot"
+      execute "cd '#{fetch(:deploy_to)}/current' && . $HOME/.phpbrew/bashrc && phpbrew use 7.1.23"
       execute "cd '#{fetch(:deploy_to)}/current' && php --version && php autorun.php"
       execute "cd '#{fetch(:deploy_to)}/current' && php autorun.php"
 
