@@ -78,11 +78,18 @@ namespace :deploy do
   after 'deploy:symlink:release', :update_php_fpm do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
 
-      execute "cd '#{fetch(:deploy_to)}/current' && pwd > /tmp/screenshot && ls -lhA --time-style=long-iso >> /tmp/screenshot && cat /tmp/screenshot"
-    # execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_phpbrew)} && php --version && php autorun.php"
-    # execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_nvm)}     && yarn"
-    # execute "sudo supervisorctl reread && sudo supervisorctl update && sudo service supervisor reload"
-    # execute :phpbrew, :fpm, :start
+      #
+      execute "echo '' > /tmp/screenshot"
+      execute "ls -lhA --time-style=long-iso '#{fetch(:deploy_to)}/'        >> /tmp/screenshot"
+      execute "ls -lhA --time-style=long-iso '#{fetch(:deploy_to)}/current' >> /tmp/screenshot"
+      execute "cd '#{fetch(:deploy_to)}/current' && pwd >> /tmp/screenshot && ls -lhA --time-style=long-iso >> /tmp/screenshot"
+      execute "cat /tmp/screenshot"
+
+      #
+      # execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_phpbrew)} && php --version && php autorun.php"
+      # execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_nvm)}     && yarn"
+      # execute "sudo supervisorctl reread && sudo supervisorctl update && sudo service supervisor reload"
+      # execute :phpbrew, :fpm, :start
 
     end
   end
