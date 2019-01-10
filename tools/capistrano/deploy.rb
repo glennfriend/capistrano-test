@@ -6,7 +6,7 @@ set :deploy_to,     ENV['DEPLOY_TO']      # /var/www/my-app
 
 set :php_bin_path,  "$HOME/.phpbrew/php/php-7.1.23/bin"
 set :exec_phpbrew,  "source $HOME/.phpbrew/bashrc && phpbrew use 7.1.23"
-set :exec_nvm,      "source $HOME/.nvm/nvm.sh && nvm use 10.8.0"
+set :exec_nvm,      "source $HOME/.nvm/nvm.sh     && nvm use 10.8.0"
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -66,6 +66,9 @@ set :yarn_flags, ''           # default
 set :yarn_roles, :all         # default
 set :yarn_env_variables, {}   # default
 
+
+
+
 namespace :deploy do
 
 #  after "deploy:updated", :laravel_tasks do
@@ -76,6 +79,13 @@ namespace :deploy do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
 
       execute "cd '#{fetch(:deploy_to)}/current' && ls -lhA --time-style=long-iso > /tmp/screenshot && cat /tmp/screenshot"
+      execute "cd '#{fetch(:deploy_to)}/current'"
+      execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_phpbrew)} "
+      execute "cd '#{fetch(:deploy_to)}/current' && php --version && php autorun.php"
+      execute "cd '#{fetch(:deploy_to)}/current' && php autorun.php"
+
+
+
       execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_phpbrew)} && php --version && php autorun.php"
       execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_nvm)}     && yarn"
       execute "sudo supervisorctl reread && sudo supervisorctl update && sudo service supervisor reload"
