@@ -37,9 +37,8 @@ set :default_env, {
 set :linked_dirs, %w{vendor storage node_modules}
 
 ###
-#set :composer_working_dir, -> { "#{fetch(:release_path)}" }
-#set :composer_install_flags, ''
-
+set :composer_working_dir, -> { "#{fetch(:release_path)}" }
+set :composer_install_flags, ''
 
 ###
 set :laravel_working_dir, "./"
@@ -50,10 +49,9 @@ set :laravel_set_linked_dirs, false
 set :laravel_set_acl_paths, true
 set :laravel_server_user, "www-data"
 
-
 # nvm settings
 set :nvm_type, :user # or :system, depends on your nvm setup
-set :nvm_node, 'v8.9.1'
+set :nvm_node, 'v10.8.0'
 set :nvm_map_bins, %w{node yarn cross-env}
 set :nvm_node_path, -> {
   if fetch(:nvm_type, :user) == :system
