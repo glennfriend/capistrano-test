@@ -41,7 +41,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  capistrano (~> 3.6)
+  capistrano (~> 3.10)
   capistrano-composer
   capistrano-env-config
   capistrano-laravel
@@ -50,4 +50,4 @@ DEPENDENCIES
   capistrano-yarn
 
 BUNDLED WITH
-   1.16.3
+   1.16.6
