@@ -6,7 +6,7 @@ set :deploy_to,     ENV['DEPLOY_TO']      # /var/www/my-app
 
 set :php_bin_path,  "$HOME/.phpbrew/php/php-7.3.2/bin"
 set :exec_phpbrew,  "source $HOME/.phpbrew/bashrc && phpbrew use 7.3.2"
-set :exec_nvm,      "source $HOME/.nvm/nvm.sh     && nvm use 10.8.0"
+set :exec_nvm,      "source $HOME/.nvm/nvm.sh     && nvm use 11.11.0"
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -51,7 +51,7 @@ set :laravel_server_user, "www-data"
 
 # nvm settings
 set :nvm_type, :user # or :system, depends on your nvm setup
-set :nvm_node, 'v10.8.0'
+set :nvm_node, 'v11.11.0'
 set :nvm_map_bins, %w{node yarn cross-env}
 set :nvm_node_path, -> {
   if fetch(:nvm_type, :user) == :system
