@@ -2,6 +2,10 @@
 ```
 bundle
 cp .env.example .env
+
+sudo mkdir -p /opt/www
+sudo chown -R ubuntu.ubuntu /opt/www
+# sudo chmod -R 755 /opt/www
 ```
 
 #### try

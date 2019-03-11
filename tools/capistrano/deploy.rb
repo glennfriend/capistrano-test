@@ -4,8 +4,8 @@ set :application,   ENV['APPLICATION']    # my-app
 set :repo_url,      ENV['REPO']           # git@github.com:your_github_account/project-name.git
 set :deploy_to,     ENV['DEPLOY_TO']      # /var/www/my-app
 
-set :php_bin_path,  "$HOME/.phpbrew/php/php-7.1.23/bin"
-set :exec_phpbrew,  "source $HOME/.phpbrew/bashrc && phpbrew use 7.1.23"
+set :php_bin_path,  "$HOME/.phpbrew/php/php-7.3.2/bin"
+set :exec_phpbrew,  "source $HOME/.phpbrew/bashrc && phpbrew use 7.3.2"
 set :exec_nvm,      "source $HOME/.nvm/nvm.sh     && nvm use 10.8.0"
 
 # Default branch is :master
