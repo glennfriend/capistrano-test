@@ -6,6 +6,14 @@
     "type": "project",
     "require": {
         "php": ">=7.0.8"
+    },
+    "repositories": {
+        "private-info": {
+            "type": "path",
+            "url": "packages/Cor/PrivateInfo"
+        }
+    },
+    "require-dev": {
+        "cor/private-info": "dev-master"
     }
 }
-

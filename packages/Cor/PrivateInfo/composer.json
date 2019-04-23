@@ -1,0 +1,29 @@
+{
+    "name": "cor/private-info",
+    "description": "support private information",
+    "require": {
+        "php": ">=7.0.0",
+        "rap2hpoutre/laravel-log-viewer": "^1.1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cor\\PrivateInfo\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Cor\\PrivateInfo\\PrivateInfoServiceProvider",
+                "Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
