@@ -1,4 +1,0 @@
-如何將
-    private_info/phpinfo
-    private_info/logs
-註冊到 board package ????

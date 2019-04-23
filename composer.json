@@ -1,19 +1,17 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "system/capistrano-test",
     "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=7.0.8"
     },
-    "repositories": {
-        "private-info": {
-            "type": "path",
-            "url": "packages/Cor/PrivateInfo"
-        }
-    },
     "require-dev": {
-        "cor/private-info": "dev-master"
+        "cor/just-test": "@dev"
+    },
+    "repositories": {
+        "just-test": {
+            "type": "path",
+            "url": "packages/Cor/JustTest"
+        }
     }
 }
