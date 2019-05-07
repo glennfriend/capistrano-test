@@ -4,9 +4,11 @@ set :application,   ENV['APPLICATION']    # my-app
 set :repo_url,      ENV['REPO']           # git@github.com:your_github_account/project-name.git
 set :deploy_to,     ENV['DEPLOY_TO']      # /var/www/my-app
 
-set :php_bin_path,  "$HOME/.phpbrew/php/php-7.3.2/bin"
-set :exec_phpbrew,  "source $HOME/.phpbrew/bashrc && phpbrew use 7.3.2"
-set :exec_nvm,      "source $HOME/.nvm/nvm.sh     && nvm use 11.11.0"
+set :php_bin_path,  "$HOME/.phpbrew/php/php-#{ENV['PHP_VERSION']}/bin"
+set :exec_phpbrew,  "source $HOME/.phpbrew/bashrc && phpbrew use #{ENV['PHP_VERSION']}"
+set :exec_nvm,      "source $HOME/.nvm/nvm.sh     && nvm use #{ENV['NODE_VERSION']}"
+
+lock '3.6.0'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -27,9 +29,9 @@ set :exec_nvm,      "source $HOME/.nvm/nvm.sh     && nvm use 11.11.0"
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for default_env is {}
-# set :default_env, {
-#   path: "#{fetch(:php_bin_path)}:/opt/ruby/bin:$PATH"
-# }
+set :default_env, {
+  path: "#{fetch(:php_bin_path)}:$PATH"
+}
 
 set :linked_dirs, %w{vendor storage node_modules}
 
@@ -40,7 +42,7 @@ set :composer_install_flags, ''
 ###
 set :laravel_working_dir, "./"
 set :laravel_dotenv_file, ".env"  # do not copy local .env to the server
-set :laravel_version, 5.6
+set :laravel_version, 5.7
 set :laravel_artisan_flags, "--env=production"
 set :laravel_set_linked_dirs, false
 set :laravel_set_acl_paths, true
@@ -48,7 +50,7 @@ set :laravel_server_user, "www-data"
 
 # nvm settings
 set :nvm_type, :user # or :system, depends on your nvm setup
-set :nvm_node, 'v11.11.0'
+set :nvm_node, "v#{ENV['NODE_VERSION']}"
 set :nvm_map_bins, %w{node yarn cross-env}
 set :nvm_node_path, -> {
   if fetch(:nvm_type, :user) == :system
@@ -68,15 +70,22 @@ set :yarn_env_variables, {}   # default
 
 namespace :deploy do
 
+  before "nvm:wrapper", :show_information do
+    on roles(:app), in: :groups, limit: 3 do
+
+      execute "php -v"
+      execute "#{fetch(:exec_phpbrew)} && php -v"
+      execute "echo '=========='"
+
+    end
+  end
+
 #  after "deploy:updated", :laravel_tasks do
 #    invoke "laravel:migrate_db", :'--force'
 #  end
 
   after 'deploy:symlink:release', :update_php_fpm do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-
-      #
-      execute "php -v"
 
       #
       execute "echo '' > /tmp/screenshot"
