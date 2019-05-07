@@ -11,9 +11,6 @@ set :exec_nvm,      "source $HOME/.nvm/nvm.sh     && nvm use 11.11.0"
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
-# Default value for :scm is :git
-# set :scm, :git
-
 # Default value for :format is :pretty
 # set :format, :pretty
 
@@ -77,6 +74,9 @@ namespace :deploy do
 
   after 'deploy:symlink:release', :update_php_fpm do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
+
+      #
+      execute "php -v"
 
       #
       execute "echo '' > /tmp/screenshot"
