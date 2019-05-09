@@ -31,9 +31,10 @@ lock '3.6.0'
 # Default value for default_env is {}
 set :default_env, {
   path: "#{fetch(:php_bin_path)}:$PATH"
+  # path: "#{fetch(:php_bin_path)}:/opt/ruby/bin:$PATH"
 }
 
-set :linked_dirs, %w{vendor storage node_modules}
+set :linked_dirs, %w{storage node_modules}
 
 ###
 set :composer_working_dir, -> { "#{fetch(:release_path)}" }
@@ -74,8 +75,8 @@ namespace :deploy do
     on roles(:app), in: :groups, limit: 3 do
 
       execute "php -v"
-      execute "#{fetch(:exec_phpbrew)} && php -v"
-      execute "echo '=========='"
+      # execute "#{fetch(:exec_phpbrew)} && php -v"
+      execute "echo '============================================================'"
 
     end
   end
