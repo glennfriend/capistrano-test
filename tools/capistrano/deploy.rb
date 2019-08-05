@@ -114,6 +114,7 @@ namespace :deploy do
       # execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_nvm)}     && yarn"
       # execute "sudo supervisorctl reread && sudo supervisorctl update && sudo service supervisor reload"
       # execute :phpbrew, :fpm, :start
+      # execute :sudo, :service, 'supervisor', 'restart'
 
     end
   end
