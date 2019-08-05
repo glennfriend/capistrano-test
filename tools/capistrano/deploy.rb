@@ -9,6 +9,7 @@ set :exec_phpbrew,  "source $HOME/.phpbrew/bashrc && phpbrew use #{ENV['PHP_VERS
 set :exec_nvm,      "source $HOME/.nvm/nvm.sh     && nvm use #{ENV['NODE_VERSION']}"
 
 lock '3.6.0'
+# 請嘗試 => lock '3.11.0'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -36,6 +37,9 @@ set :default_env, {
 
 set :linked_dirs, %w{storage node_modules}
 
+# /opt/www/xxxxxx/releases 最多留下多少個版本?
+set :keep_releases, 5
+
 ###
 set :composer_working_dir, -> { "#{fetch(:release_path)}" }
 set :composer_install_flags, ''
@@ -48,6 +52,9 @@ set :laravel_artisan_flags, "--env=production"
 set :laravel_set_linked_dirs, false
 set :laravel_set_acl_paths, true
 set :laravel_server_user, "www-data"
+
+
+
 
 # nvm settings
 set :nvm_type, :user # or :system, depends on your nvm setup
@@ -94,6 +101,13 @@ namespace :deploy do
       execute "ls -lhA --time-style=long-iso '#{fetch(:deploy_to)}/current' >> /tmp/screenshot"
       execute "cd '#{fetch(:deploy_to)}/current' && pwd >> /tmp/screenshot && ls -lhA --time-style=long-iso >> /tmp/screenshot"
       execute "cat /tmp/screenshot"
+
+      execute "    #{fetch(:exec_phpbrew)}              \
+                                                        \
+                && cd '#{fetch(:deploy_to)}/current'    \
+                && echo                                 \
+                && php artisan config:clear && php artisan cache:clear && php artisan route:clear && php artisan view:clear                         \
+      "
 
       #
       # execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_phpbrew)} && php --version && php autorun.php"
