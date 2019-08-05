@@ -1,10 +1,5 @@
 # https://discuss.circleci.com/t/build-on-tag/9864/42
 # NOTE: a workaround that make circle-ci 2.0 support $CIRCLE_TAG environment variable
-# 
-# project_name="hello-world"
-# mkdir /var/www/${project_name}/.circleci
-# ln -s /var/www/${project_name}/tools/circleci/hello-world-config.yml  /var/www/${project_name}/.circleci/config.yml
-# 
 deployment:
   fake_deploy_for_production:
     tag: /.*/
