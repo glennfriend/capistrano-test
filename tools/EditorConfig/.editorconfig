@@ -12,9 +12,6 @@ trim_trailing_whitespace = true
 [{*.md,*.diff}]
 trim_trailing_whitespace = false
 
-[*.yml]
-indent_size = 2
-
 # The JSON files contain newlines inconsistently
 [*.json]
 insert_final_newline = ignore
@@ -31,4 +28,7 @@ indent_style = ignore
 indent_size = ignore
 
 [{*.php,*.py,*.md}]
+indent_size = 4
+
+[composer.json]
 indent_size = 4
