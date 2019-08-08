@@ -1,0 +1,34 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# markdown 行尾三個空格為 換行
+[{*.md,*.diff}]
+trim_trailing_whitespace = false
+
+[*.yml]
+indent_size = 2
+
+# The JSON files contain newlines inconsistently
+[*.json]
+insert_final_newline = ignore
+
+[**.min.js]
+indent_style = ignore
+insert_final_newline = ignore
+
+[docs/**.txt]
+max_line_length = 79
+
+[**/vendor/**]
+indent_style = ignore
+indent_size = ignore
+
+[{*.php,*.py,*.md}]
+indent_size = 4
