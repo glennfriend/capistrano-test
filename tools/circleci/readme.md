@@ -5,10 +5,8 @@
 
 #### install
 ```
-cd /var/www/hello-world
-mkdir .circleci
-cp    tools/circleci/hello-world-config.yml  .circleci/config.yml
-                     ^^^^^^^^^^^^^^^^^^^^^^
+cp -r tools/circleci/.circleci  /var/www/your_new_project
+
 ```
 
 #### github
