@@ -21,6 +21,7 @@ jobs:
 
     steps:
       - checkout
+
       - run:
           name: Install System Libs
           command: |
@@ -42,6 +43,7 @@ jobs:
           command: |
             cp .env.example .env
             composer install
+
       - save_cache:
           key: dependency-cache-php-composer-{{ checksum "composer.lock" }}
           paths:
@@ -51,9 +53,10 @@ jobs:
           name: Run Tests
           command: |
             composer test
-            if [[ -f Modules ]]; then
+            if [[ -d Modules ]]; then
               composer test:modules
             fi
+
       - deploy:
           command: |
             /usr/bin/gem install bundler -v 1.16.0
@@ -67,6 +70,7 @@ jobs:
             elif [[ "${CIRCLE_BRANCH}" == "issue-464-bi" ]]; then
               CI_BRANCH=issue-464-bi cap staging deploy
             fi
+
       - save_cache:
           key: dependency-cache-rubygem-{{ checksum "Gemfile.lock" }}
           paths:

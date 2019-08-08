@@ -1,0 +1,38 @@
+# https://discuss.circleci.com/t/build-on-tag/9864/42
+# NOTE: a workaround that make circle-ci 2.0 support $CIRCLE_TAG environment variable
+deployment:
+  fake_deploy_for_production:
+    tag: /.*/
+    commands:
+      - echo "make tags run in 2.0"
+
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+    docker:
+      - image: php:7.3.3
+        cmd: ["/bin/bash"]
+
+    steps:
+      - checkout
+      - run:
+          name: Install System Libs
+          command: |
+            apt -qq update
+            apt install -y -qq git zlib1g-dev libzip-dev
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            php composer-setup.php
+            mv composer.phar /usr/local/bin/composer
+            php -r "unlink('composer-setup.php');"
+
+      - run:
+          name: Install Dependencies
+          command: |
+            cp .env.example .env
+            composer install
+
+      - run:
+          name: Run Tests
+          command: |
+            ./vendor/bin/phpunit --testdox -v tests

@@ -1,9 +1,12 @@
+## circleci
+- 自動建化部署、建置、測試
+- CI (持續整合)
+- CD (持續部署)
+
 #### install
 ```
-cd /var/www/hello-world
-mkdir .circleci
-cp    tools/circleci/hello-world-config.yml  .circleci/config.yml
-                     ^^^^^^^^^^^^^^^^^^^^^^
+cp -r tools/circleci/.circleci  /var/www/your_new_project
+
 ```
 
 #### github
