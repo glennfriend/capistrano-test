@@ -51,7 +51,7 @@ jobs:
           name: Run Tests
           command: |
             composer test
-            if [[ -f Modules ]]; then
+            if [[ -d Modules ]]; then
               composer test:modules
             fi
       - deploy:

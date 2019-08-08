@@ -1,3 +1,8 @@
+## circleci
+- 自動建化部署、建置、測試
+- CI (持續整合)
+- CD (持續部署)
+
 #### install
 ```
 cd /var/www/hello-world
