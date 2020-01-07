@@ -94,30 +94,45 @@ namespace :deploy do
 
   after 'deploy:symlink:release', :update_php_fpm do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-
-      #
+      # debug log
       execute "echo '' > /tmp/screenshot"
       execute "ls -lhA --time-style=long-iso '#{fetch(:deploy_to)}/'        >> /tmp/screenshot"
       execute "ls -lhA --time-style=long-iso '#{fetch(:deploy_to)}/current' >> /tmp/screenshot"
       execute "cd '#{fetch(:deploy_to)}/current' && pwd >> /tmp/screenshot && ls -lhA --time-style=long-iso >> /tmp/screenshot"
       execute "cat /tmp/screenshot"
+    end
+  end
 
-      execute "    #{fetch(:exec_phpbrew)}              \
-                                                        \
-                && cd '#{fetch(:deploy_to)}/current'    \
-                && echo                                 \
-                && php artisan config:clear && php artisan cache:clear && php artisan route:clear && php artisan view:clear                         \
-      "
-
+  after 'deploy:symlink:release', :update_php_fpm do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
       #
       # execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_phpbrew)} && php --version && php autorun.php"
       # execute "cd '#{fetch(:deploy_to)}/current' && #{fetch(:exec_nvm)}     && yarn"
       # execute "sudo supervisorctl reread && sudo supervisorctl update && sudo service supervisor reload"
       # execute :phpbrew, :fpm, :start
       # execute :sudo, :service, 'supervisor', 'restart'
-
     end
   end
+
+  after 'deploy:symlink:release', :update_php_fpm do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      # clear laravel cache
+      execute "    #{fetch(:exec_phpbrew)}              \
+                                                        \
+                && cd '#{fetch(:deploy_to)}/current'    \
+                && echo                                 \
+                && php artisan config:clear && php artisan cache:clear && php artisan route:clear && php artisan view:clear                         \
+      "
+    end
+  end
+
+  after 'deploy:symlink:release', :update_php_fpm do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      # apidoc
+      execute "cd '#{fetch(:deploy_to)}/current' && apidoc -i ./Modules/ -o ./public/apidoc"
+    end
+  end
+
 end
 
 
