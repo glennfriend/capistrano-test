@@ -4,14 +4,5 @@
     "type": "project",
     "require": {
         "php": ">=7.0.8"
-    },
-    "require-dev": {
-        "cor/just-test": "@dev"
-    },
-    "repositories": {
-        "just-test": {
-            "type": "path",
-            "url": "packages/Cor/JustTest"
-        }
     }
 }
