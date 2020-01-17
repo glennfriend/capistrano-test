@@ -1,7 +1,5 @@
 /node_modules
 /vendor
-/.idea
-/.vscode
 /log
 npm-debug.log
 yarn-error.log
